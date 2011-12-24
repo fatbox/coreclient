@@ -4,6 +4,7 @@ setup(
         name='corelib',
         packages=['core'],
         version='0.1',
+        license='BSD',
         description='Client libraries for accessing a CORE deployment',
         author='Evan Borgstrom',
         author_email='evan@fatbox.ca',
