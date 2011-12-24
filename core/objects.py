@@ -17,10 +17,13 @@ class Object(object):
     """
     url = None
 
-    def __init__(self, data=None, url=None):
-        if url:
+    def __init__(self, data=None, filter=None, url=None):
+        if url or filter:
             client = get_client()
+        if url:
             data = client.make_request(url, has_base=True)
+        elif filter:
+            data = client.make_request(self.__class__.make_url(filter))
 
         if not is_api_object(data):
             raise ObjectException("Not a valid object")
