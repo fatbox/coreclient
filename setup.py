@@ -1,13 +1,15 @@
 from distutils.core import setup
 
 setup(
-        name='corelib',
+        name='coreclient',
         packages=['core'],
         version='0.1',
         license='BSD',
         description='Client libraries for accessing a CORE deployment',
+        long_description=open('README').read(),
         author='Evan Borgstrom',
         author_email='evan@fatbox.ca',
+        url='https://github.com/fatbox/coreclient',
         classifiers=[
             'Development Status :: 3 - Alpha',
             'Intended Audience :: Developers',
