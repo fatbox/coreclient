@@ -18,15 +18,29 @@ class Object(object):
     url = None
 
     def __init__(self, data=None, filter=None, url=None):
+        invalid = ObjectException("Not a valid object")
+
         if url or filter:
             client = get_client()
         if url:
             data = client.make_request(url, has_base=True)
         elif filter:
+            # since we're filtering we're going to get back
+            # a collection instead of a single object
             data = client.make_request(self.__class__.make_url(filter))
 
+            if not is_api_collection(data):
+                raise invalid
+
+            if data['meta']['total_count'] != 1:
+                raise ObjectException("Too many objects returned")
+
+            # now that we know it's valid set the data reference
+            # to the first object
+            data = data['objects'][0]
+
         if not is_api_object(data):
-            raise ObjectException("Not a valid object")
+            raise invalid
 
         self.data = data
 
