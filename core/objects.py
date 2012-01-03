@@ -137,6 +137,15 @@ class Device(Object, DataArray):
             if service['service_key'] == key:
                 return service
 
+    @property
+    def primary_ip(self):
+        """
+        Shortcut to fetch the primary IP address
+        """
+        for ip in self['ips']:
+            if ip['primary'] == True:
+                return ip
+
 class Devices(Objects):
     type = Device
 
