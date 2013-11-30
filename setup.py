@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
         name='coreclient',
         packages=['core'],
-        version='0.2.1',
+        version='0.2.2',
         license='BSD',
         description='Client libraries for accessing a CORE deployment',
         long_description=open('README').read(),
