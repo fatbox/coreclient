@@ -2,6 +2,9 @@ import httplib2
 import simplejson as json
 import re
 
+class CoreClientException(Exception):
+    pass
+
 default_client = None
 
 def get_client():
@@ -41,6 +44,9 @@ class Client(object):
                 url_parts = (self.host, self.base_url, url)
             full_url = '/'.join(url_parts)
             response, content = self.http.request(full_url)
+
+            if response.status != 200:
+                raise CoreClientException("Request to %s did not return 200 OK" % full_url)
 
             # load the data 
             return json.loads(content)
